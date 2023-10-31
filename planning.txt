@@ -1,0 +1,39 @@
+Pasul 1: Planificarea și Design-ul
+    Ce clase îmi vor fi necesare?
+    Ce metode și proprietăți va avea fiecare clasă?
+    Cum voi gestiona ordinea operațiilor și parantezele?
+    
+    Clase necesare:
+    Clasa Token: Reprezentarea elementelor individuale din expresie (numere, operatori, paranteze).
+        Proprietăți: tip (număr, operator, paranteză), valoare (pentru numere și operatori).
+        Metode: constructori, metode de acces pentru proprietăți.
+    
+    Clasa Parser: Transformarea șirului de intrare într-o listă de tokenuri.
+        Proprietăți: șirul de intrare, vectorul de tokenuri.
+        Metode: parse() pentru a transforma șirul de intrare în tokenuri, metode ajutătoare pentru a identifica numerele, operatorii și parantezele.
+    
+    Clasa Evaluator: Calcularea valorii expresiei pe baza listei de tokenuri.
+        Proprietăți: stiva pentru numere, stiva pentru operatori, vectorul de tokenuri.
+        Metode: eval() pentru a calcula valoarea expresiei, applyOperator() pentru a aplica un operator la valorile din stiva de numere, precum și alte metode ajutătoare.
+
+    Gestionarea Ordinii Operațiilor și Parantezelor:
+        Ordinea Operațiilor: Vom folosi o stivă pentru a gestiona ordinea operațiilor. Operatorii vor fi puși în stivă în ordinea în care apar, dar de fiecare dată când adăugăm un operator nou în stivă, vom verifica dacă există deja operatori în stivă cu prioritate mai mare sau egală, și în acest caz îi aplicăm întâi.
+        Parantezele: Parantezele vor afecta ordinea operațiilor. Când întâmpinăm o paranteză deschisă, pur și simplu o punem în stivă. Când întâmpinăm o paranteză închisă, aplicăm toți operatorii din stivă până când întâmpinăm paranteza deschisă corespunzătoare. Trebuie să avem grijă să gestionăm corect diferitele tipuri de paranteze și să verificăm că fiecare paranteză deschisă are o paranteză închisă corespunzătoare.
+
+Pasul 2: Implementarea Funcționalităților de Bază
+    Implementarea unui Parser: Trebuie să implementăm un parser care să poată citi și analiza expresia introdusă de la tastatură. Parser-ul va trebui să identifice numerele, operatorii și parantezele. De asemenea, ar trebui să poată gestiona erorile, precum împărțirea la zero sau expresiile invalide.
+    Implementarea Evaluatorului de Expresii: După ce am parsat expresia, următorul pas este evaluarea ei. Aici putem folosi un algoritm precum Shunting Yard pentru a transforma expresia în forma postfixată și apoi o evaluăm folosind o stivă.
+
+Pasul 3: Gestionarea Parantezelor
+    Gestionarea Diferitelor Tipuri de Paranteze: Trebuie să ne asigurăm că parser-ul și evaluatorul nostru pot gestiona diferite tipuri de paranteze: (), [] și {}.
+    Verificarea Corectitudinii Parantezelor: Trebuie să verificăm că fiecare paranteză deschisă este închisă corect și invers.
+
+Pasul 4: Implementarea Operațiilor Speciale
+    Ridicarea la Putere și Extragerea Radicalului: Trebuie să implementăm funcționalitatea pentru aceste două operații speciale.
+
+Pasul 5: Testare și Debugging
+    Testarea Aplicației: După ce am implementat toate funcționalitățile, este crucial să testăm aplicația cu diverse tipuri de expresii pentru a ne asigura că totul funcționează cum trebuie.
+    Debugging: Dacă întâmpinăm probleme sau erori, trebuie să trecem prin cod și să identificăm și rezolvăm problemele.
+
+Pasul 6: Îmbunătățiri și Optimizări
+    După ce ne-am asigurat că aplicația funcționează corect, putem să ne gândim la posibile îmbunătățiri sau optimizări.
