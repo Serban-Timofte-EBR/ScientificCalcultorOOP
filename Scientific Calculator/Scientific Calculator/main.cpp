@@ -1,4 +1,5 @@
 #include <iostream>
+#include "Token.h"
 using namespace std;
 
 class Util {
@@ -6,6 +7,7 @@ class Util {
 };
 
 int main() {
-	cout << "Hello" << endl;
+	Token t1;
+	cout << static_cast<int>(t1.get_type()) << endl;
 	return 0;
 }
