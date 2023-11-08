@@ -2,42 +2,75 @@
 #include <iostream>
 using namespace std;
 
-const int Token::before = 0;
 int Token::counter = 0;
 
-Token::Token() :type(Elements::NUMBER), value("0") {}
-Token::Token(Elements type, string& value) : type(type), value(value) {}
-Token::Token(const Token& copy) :type(copy.type), value(copy.value) {}
-
-Token::~Token() {};
-
-Elements Token::get_type() { return this->type; };
-
-string Token::get_value() { return this->value; }
-
-void Token::set_value(string value) {
-	this->value = value;
+Token::Token() : type(TokenType::NUMBER), value("0") {
+    counter++;
 }
 
-int Token::get_before(const Token& token) {
-	if (token.type != Elements::OPERATOR) { throw exception("THIS IS NOT AN OPERATION TO HAVE A BEFORE"); }
+Token::Token(TokenType type, const string& val) : type(type), value(val) {
+    counter++;
+}
 
-	switch (token.value[0]) {
-	case '+': return 1;
-	case '-': return 1;
-	case '*': return 2;
-	case '/': return 2;
-	case '^': return 3;
-	case '#': return 4;
-	default:
-		throw exception("NOT AN OPERATOR");
-	}
+Token::Token(const Token& other) : type(other.type), value(other.value) {
+    counter++;
 }
 
 Token& Token::operator=(const Token& other) {
-	if (this != &other) {
-		type = other.type;
-		value = other.value;
-	}
-	return *this;
+    if (this != &other) {
+        type = other.type;
+        value = other.value;
+    }
+    return *this;
+}
+
+Token::~Token() {
+    counter--;
+}
+
+TokenType Token::getType() const {
+    return type;
+}
+
+const string& Token::getValue() const {
+    return value;
+}
+
+void Token::setType(TokenType newType) {
+    type = newType;
+}
+
+void Token::setValue(const string& newValue) {
+    value = newValue;
+}
+
+int Token::getTokenCount() {
+    return counter;
+}
+
+int Token::getPrecedence(const Token& token) {
+    if (token.getType() != TokenType::OPERATOR) {
+        throw invalid_argument("Non-operator tokens do not have precedence.");
+    }
+
+    string operators = "+-*/^#";
+    size_t found = operators.find(token.getValue());
+    if (found == string::npos) {
+        throw invalid_argument("Unknown operator.");
+    }
+
+    switch (found) {
+    case 0: // '+' or '-'
+    case 1:
+        return 1;
+    case 2: // '*' or '/'
+    case 3:
+        return 2;
+    case 4: // '^'
+        return 3;
+    case 5: // '#'
+        return 4;
+    default:
+        return -1;
+    }
 }

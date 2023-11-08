@@ -8,6 +8,6 @@ class Util {
 
 int main() {
 	Token t1;
-	cout << static_cast<int>(t1.get_type()) << endl;
+	cout << t1.getTokenCount() << endl;
 	return 0;
 }

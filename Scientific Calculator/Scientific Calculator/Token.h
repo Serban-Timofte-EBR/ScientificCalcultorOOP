@@ -3,33 +3,30 @@
 #include <string>
 using namespace std;
 
-enum class Elements { NUMBER, OPERATOR, PARANTHESIS };
+enum class TokenType {
+    NUMBER,
+    OPERATOR,
+    PARENTHESIS
+};
 
+// Token class to represent elements in mathematical expressions.
 class Token {
 private:
-	Elements type = Elements::NUMBER;
-	string value = " ";
-
-	static const int before;
-	static int counter;
+    TokenType type;
+    string value;
+    static int counter;
 
 public:
-	Token();
-	Token(Elements type, string& value);
-	Token(const Token& copy);
-	Token& operator=(const Token& copy);
+    Token();
+    Token(TokenType type, const std::string& value);
+    Token(const Token& other);
+    Token& operator=(const Token& other);
+    ~Token();
 
-	~Token();
-
-	Elements get_type();
-
-	string get_value();
-
-	void set_type(Elements type);
-
-	void set_value(string value);
-
-	static int get_before(const Token& token);
-
-	// @TODO: Supraincarcare Operatori
+    TokenType getType() const;
+    void setType(TokenType newType);
+    const string& getValue() const;
+    void setValue(const std::string& newValue);
+    static int getTokenCount();
+    static int getPrecedence(const Token& token);
 };
