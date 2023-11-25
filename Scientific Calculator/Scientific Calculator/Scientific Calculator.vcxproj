@@ -186,6 +186,7 @@
     <ClCompile Include="Token.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Parser.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
