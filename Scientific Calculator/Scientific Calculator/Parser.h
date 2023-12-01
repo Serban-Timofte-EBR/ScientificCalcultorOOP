@@ -18,6 +18,7 @@ private:
     bool isNumber(char c);
 
 public:
+    Parser();
     Parser(const string& expr);
     Parser(const Parser& other);
     ~Parser();
@@ -27,4 +28,19 @@ public:
     void parse();
     Token* getTokens() const;
     int getTokenCount() const;
+
+    string get_expression();
+    void set_expression(const string& expr);
+
+    int get_tokenCount();
+    void set_tokenCount(int count);
+
+    int get_capacity();
+    void set_capacity(int cap);
+
+    friend ostream& operator<<(ostream& cons, const Parser& parser);
+    friend istream& operator>>(istream& cons, Parser& parser);
+
+    Token& operator[](int index);
+    explicit operator string();
 };
