@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Scientific Calculator",
+    "\\Scientific Calculator\\Scientific Calculator"
   ],
-  "SelectedNode": "\\Scientific Calculator.sln",
+  "SelectedNode": "\\Scientific Calculator\\Scientific Calculator\\main.cpp",
   "PreviewInSolutionExplorer": false
 }

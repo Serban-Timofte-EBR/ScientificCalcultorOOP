@@ -5,69 +5,41 @@
 	Const value
 v	Static value 
 v	Static method
-	Setters & Getters for everything: Token	v	Parser		Eval
+	Setters & Getters for everything: Token	v	Parser		Eval		Expression
 	At least 2 methods per class: Token	v	Parser		Eval
-	At least 1 default constructor and one constructor with params: Token v		Parser		Eval
+	At least 1 default constructor and one constructor with params: Token v		Parser		Eval		Expression
 	Operators << and >>: Token	v	Parser		Eval
-	Other 2 operators per class: Token	v	Parser		Eval
-	Implementation in header and cpp file: Token	v	Parser		Eval
+	Other 2 operators per class: Token	v	Parser		Eval		Expression
+	Implementation in header and cpp file: Token	v	Parser		Eval		Expression
 */
+#include "Expression.h"
 #include <iostream>
-#include "Token.h"
+#include <string>
+
 using namespace std;
 
-class Util {
-
-};
-
 int main() {
-	cout << "Testing the Token Class!" << endl;
-	Token token1("10", TokenType::NUMBER);
-	cout << "Token 1: ";
-	cout << token1;
+    cout << "Welcome to the Scientific Calculator!" << endl;
+    cout << "Enter an expression to evaluate, or type 'exit' to quit." << endl;
 
-	Token token2 = token1;
-	cout << "Token 2 (copy of Token 1): ";
-	cout << token2;
+    string input;
+    while (true) {
+        cout << "Enter expression: ";
+        getline(cin, input);
 
-	Token token3;
-	cout << "Enter the values for Token 3: ";
-	cin >> token3;
-	token3.set_type(TokenType::NUMBER); 
-	cout << "Token 3: ";
-	cout << token3;
+        if (input == "exit") {
+            break;
+        }
 
-	cout << "Number of Token instances: " << Token::get_counter() << endl;
+        Expression expr(input);
+        if (expr.evaluate()) {
+            cout << "Result: " << expr.getResult() << endl;
+        }
+        else {
+            cout << "Invalid expression or error during evaluation." << endl;
+        }
+    }
 
-	cout << endl << endl << "Testing Custom Class Methods: " << endl << endl;
-	Token numberToken("5", TokenType::NUMBER);
-	Token plusToken("+", TokenType::OPERATOR);
-	Token bracketToken("(", TokenType::PARENTHESIS);
-
-	cout << "Is numberToken an operator? " << (numberToken.isOperator() ? "Yes" : "No") << endl;
-	cout << "Is plusToken an operator? " << (plusToken.isOperator() ? "Yes" : "No") << endl;
-	cout << "Is bracketToken an operator? " << (bracketToken.isOperator() ? "Yes" : "No") << endl;
-
-	try {
-		cout << "Precedence of plusToken: " << plusToken.precedence() << endl;
-		cout << "Precedence of bracketToken: " << bracketToken.precedence() << endl; 
-	}
-	catch (const exception e) {
-		cout << "Caught exception: " << e.what() << endl;
-	}
-	cout << endl << "End of testing Custom Class Methods" << endl;
-	
-	cout << endl << endl << "Testing Custom Class Operators: " << endl << endl;
-	Token numberToken1("5", TokenType::NUMBER);
-	Token numberToken2("5", TokenType::NUMBER);
-	Token operatorToken("+", TokenType::OPERATOR);
-
-	cout << "Is numberToken1 equal to numberToken2? " << (numberToken1 == numberToken2 ? "Yes" : "No") << endl;
-	cout << "Is numberToken1 different from operatorToken? " << (numberToken1 != operatorToken ? "Yes" : "No") << endl;
-
-	cout << endl << "End of testing Custom Class Operators" << endl;
-	
-	cout << endl << "End of testing the Token Class" << endl;
-	cout << "------------------------------------------------" << endl;
-	return 0;
+    cout << "Calculator terminated." << endl;
+    return 0;
 }

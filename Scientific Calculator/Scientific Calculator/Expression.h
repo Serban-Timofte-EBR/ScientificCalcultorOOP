@@ -1,30 +1,21 @@
 #pragma once
-#pragma once
-#include <iostream>
+#include "Parser.h"
+#include "Evaluator.h"
 #include <string>
+
 using namespace std;
 
 class Expression {
 private:
-	char* expression = nullptr;
-	int length = 0;
+    string rawExpression;
+    double result;
+    bool isValid;
 
-	const int MAX_LENGTH = 1000;
 public:
-	Expression();
-	Expression(char* ex);
-	Expression(const Expression& e);
-	~Expression();
-
-	void set_expression(char* ex);
-	char* get_expression();
-	
-	int get_length;
-	void set_length(int length);
-
-	void clear();
-	bool isEmpty();
-
-	Expression& operator=(const Expression& e);
-
+    Expression();
+    explicit Expression(const string& expr);
+    void setExpression(const string& expr);
+    bool evaluate();
+    double getResult() const;
+    bool isValidExpression() const;
 };
