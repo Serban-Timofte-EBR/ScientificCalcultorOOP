@@ -1,3 +1,17 @@
+/*
+v   3 clase
+    Dynamic char vector
+v   Dynamic int/float/double vector 
+v   Const value
+v	Static value
+v	Static method
+v   Setters & Getters for everything: Token	v	Parser	v	Eval	v	Expression  v
+v   At least 2 methods per class: Token	v	Parser	v	Eval	v	Expression  v
+v   At least 1 default constructor and one constructor with params: Token v		Parser	v	Eval	v 	Expression  v
+v   Operators << and >>: Token	v	Parser	v	Eval	v	Expression  v
+v   Other 2 operators per class: Token	v	Parser	v	Eval	v	Expression  v
+v   Implementation in header and cpp file: Token	v	Parser	v	Eval	v	Expression  v
+*/
 #include "Expression.h"
 #include <iostream>
 #include <string>

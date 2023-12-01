@@ -11,7 +11,6 @@ enum class TokenType {
     UNKNOWN
 };
 
-// Token class to represent elements in mathematical expressions.
 class Token {
 private:
     string value = "";

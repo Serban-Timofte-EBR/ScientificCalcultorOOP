@@ -67,8 +67,8 @@ bool Token::isOperator() {
 int Token::precedence() {
 	//implement isOperator first!!!!!!!!!!
 	if (!isOperator()) { throw exception("Cannot use precedence for a non-operator!"); }
-	
-	if (value == "(" || value == ")" || value == "[" || value == "]") return 4; 
+
+	if (value == "(" || value == ")" || value == "[" || value == "]") return 4;
 	if (value == "^" || value == "#") return 3;
 	if (value == "*" || value == "/") return 2;
 	if (value == "+" || value == "-") return 1;
@@ -81,7 +81,7 @@ int Token::precedence() {
 
 Token& Token::operator=(const Token& t) {
 	if (this == &t) { return *this; }
-	
+
 	set_const_value(t.value);
 	set_type(t.type);
 	set_increment_counter();
@@ -94,15 +94,15 @@ void operator<<(ostream& console, Token& t) {
 	console << "Token Nr: " << t.get_counter() << endl;
 	console << "Token Type: ";
 	switch (t.get_type()) {
-		case TokenType::NUMBER: 
-			console << "NUMBER" << endl;
-			break;
-		case TokenType::OPERATOR: 
-			console << "OPERATOR" << endl;
-			break;
-		case TokenType::PARENTHESIS: 
-			console << "PARENTHESIS" << endl;
-			break;
+	case TokenType::NUMBER:
+		console << "NUMBER" << endl;
+		break;
+	case TokenType::OPERATOR:
+		console << "OPERATOR" << endl;
+		break;
+	case TokenType::PARENTHESIS:
+		console << "PARENTHESIS" << endl;
+		break;
 	}
 
 	console << "Token Value: " << t.get_value() << endl;

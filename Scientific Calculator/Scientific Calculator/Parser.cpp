@@ -51,7 +51,8 @@ void Parser::addToken(const string& value, TokenType type) {
         resize();
     }
     tokens[tokenCount] = Token(value, type);
-    cout << "Added token: " << tokens[tokenCount].get_value() << " Type: " << (type == TokenType::NUMBER ? "Number" : "Operator") << endl;
+    // Used for debugging -> Leaved as comment because we all know that will need it again :))))
+    // cout << "Added token: " << tokens[tokenCount].get_value() << " Type: " << (type == TokenType::NUMBER ? "Number" : "Operator") << endl;
     tokenCount++;
 }
 
