@@ -9,8 +9,8 @@ v	Static method
 	At least 2 methods per class: Token	v	Parser		Eval
 	At least 1 default constructor and one constructor with params: Token v		Parser		Eval
 	Operators << and >>: Token	v	Parser		Eval
-	Other 2 operators: Token		Parser		Eval
-	Implementation in header and cpp file: Token		Parser		Eval
+	Other 2 operators per class: Token	v	Parser		Eval
+	Implementation in header and cpp file: Token	v	Parser		Eval
 */
 #include <iostream>
 #include "Token.h"

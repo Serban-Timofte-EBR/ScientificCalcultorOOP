@@ -182,11 +182,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Expression.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Token.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Parser.h" />
+    <ClInclude Include="Expression.h" />
     <ClInclude Include="Token.h" />
     <ClInclude Include="Utils.h" />
   </ItemGroup>
