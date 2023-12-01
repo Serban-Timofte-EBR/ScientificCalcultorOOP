@@ -2,6 +2,8 @@
 #include <stdexcept>
 #include <cmath>
 
+Evaluator::Evaluator() : tokens(nullptr), tokenCount(0), operands(nullptr), operators(nullptr), operandsSize(0), operandsCapacity(0), operatorsSize(0), operatorsCapacity(0) {}
+
 Evaluator::Evaluator(Token* tokens, int count)
     : tokens(tokens), tokenCount(count), operands(nullptr), operators(nullptr),
     operandsSize(0), operandsCapacity(10), operatorsSize(0), operatorsCapacity(10) {
@@ -112,4 +114,104 @@ double Evaluator::evaluate() {
     }
 
     return popOperand();
+}
+
+Token* Evaluator::get_tokens() {
+    return this->tokens;
+}
+
+int Evaluator::get_tokenCount() {
+    return this->tokenCount;
+}
+
+double* Evaluator::get_operands() {
+    return this->operands;
+}
+
+string* Evaluator::get_operators() {
+    return this->operators;
+}
+
+int Evaluator::get_operandsSize() {
+    return this->operandsSize;
+}
+
+int Evaluator::get_operandsCapacity() {
+    return this->operandsCapacity;
+}
+
+int Evaluator::get_operatorsSize() {
+    return this->operatorsSize;
+}
+
+int Evaluator::get_operatorsCapacity() {
+    return this->operatorsCapacity;
+}
+
+void Evaluator::setTokens(Token* newTokens, int count) {
+    delete[] tokens;
+    tokens = new Token[count];
+    memcpy(tokens, newTokens, count * sizeof(Token));
+    tokenCount = count;
+}
+
+void Evaluator::setTokenCount(int count) {
+    tokenCount = count;
+}
+
+void Evaluator::setOperands(double* newOperands, int size, int capacity) {
+    delete[] operands;
+    operands = new double[capacity];
+    memcpy(operands, newOperands, size * sizeof(double));
+    operandsSize = size;
+    operandsCapacity = capacity;
+}
+
+void Evaluator::set_operators(string* newOperators, int size, int capacity) {
+    delete[] operators;
+    operators = new string[capacity];
+    for (int i = 0; i < size; ++i) {
+        operators[i] = newOperators[i];
+    }
+    operatorsSize = size;
+    operatorsCapacity = capacity;
+}
+
+void Evaluator::set_operandsSize(int size) {
+    operandsSize = size;
+}
+
+void Evaluator::set_operandsCapacity(int capacity) {
+    operandsCapacity = capacity;
+}
+
+void Evaluator::set_operatorsSize(int size) {
+    operatorsSize = size;
+}
+
+void Evaluator::set_operatorsCapacity(int capacity) {
+    operatorsCapacity = capacity;
+}
+
+ostream& operator<<(ostream& cons, const Evaluator& evaluator) {
+    cons << "Evaluator State:" << endl;
+    cons << "Token Count: " << evaluator.tokenCount << endl;
+    cons << "Operands Size: " << evaluator.operandsSize << endl;
+    cons << "Operators Size: " << evaluator.operatorsSize << endl;
+    return cons;
+}
+
+istream& operator>>(istream& cons, Evaluator& evaluator) {
+    cout << "Enter the number of tokens for evaluation: ";
+    cons >> evaluator.tokenCount;
+
+    return cons;
+}
+
+bool Evaluator::operator<=(const Evaluator& rhs) {
+    return this->tokenCount <= rhs.tokenCount;
+}
+
+bool Evaluator::operator>=(const Evaluator& rhs) {
+    return this->tokenCount >= rhs.tokenCount;
 }
