@@ -57,7 +57,7 @@ void Parser::addToken(const string& value, TokenType type) {
 }
 
 bool Parser::isOperator(char c) {
-    return c == '+' || c == '-' || c == '*' || c == '/' || c == '^';
+    return c == '+' || c == '-' || c == '*' || c == '/' || c == '^' || c == '#';
 }
 
 bool Parser::isNumber(char c) {
@@ -69,7 +69,7 @@ void Parser::parse() {
     char ch;
     string temp;
 
-    while (ss >> noskipws >> ch) { 
+    while (ss >> noskipws >> ch) {
         if (isspace(ch)) {
             if (!temp.empty()) {
                 addToken(temp, TokenType::NUMBER);
@@ -122,7 +122,7 @@ void Parser::set_tokenCount(int count) {
     this->tokenCount = count;
 }
 
-int Parser::get_capacity(){
+int Parser::get_capacity() {
     return this->capacity;
 }
 
