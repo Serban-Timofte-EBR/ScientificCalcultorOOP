@@ -1,42 +1,58 @@
-/*
-v   3 clase
-    Dynamic char vector
-v   Dynamic int/float/double vector 
-v   Const value
-v	Static value
-v	Static method
-v   Setters & Getters for everything: Token	v	Parser	v	Eval	v	Expression  v
-v   At least 2 methods per class: Token	v	Parser	v	Eval	v	Expression  v
-v   At least 1 default constructor and one constructor with params: Token v		Parser	v	Eval	v 	Expression  v
-v   Operators << and >>: Token	v	Parser	v	Eval	v	Expression  v
-v   Other 2 operators per class: Token	v	Parser	v	Eval	v	Expression  v
-v   Implementation in header and cpp file: Token	v	Parser	v	Eval	v	Expression  v
-*/
 #include "Expression.h"
+#include "EquationFileProcessor.h"
 #include <iostream>
 #include <string>
 
 using namespace std;
 
-int main() {
+void processEquation(const string& input) {
+    Expression expr(input);
+    if (expr.evaluate()) {
+        cout << "Result: " << expr.getResult() << endl;
+    }
+    else {
+        cout << "Invalid expression or error during evaluation." << endl;
+    }
+}
+
+int main(int argc, char* argv[]) {
     cout << "X Calculator!" << endl;
-    cout << "Enter an expression or type 'exit' to quit." << endl;
+    EquationFileProcessor fileProcessor;
 
-    string input;
-    while (true) {
-        cout << "Enter here: ";
-        getline(cin, input);
-
-        if (input == "exit") {
-            break;
+    if (argc > 1) {
+        for (int i = 1; i < argc; ++i) {
+            string input = argv[i];
+            processEquation(input);
         }
+    }
+    else {
+        while (true) {
+            cout << "\nMenu:" << endl;
+            cout << "1. Enter an equation" << endl;
+            cout << "2. Process equations from a file" << endl;
+            cout << "3. Exit" << endl;
+            cout << "Choose an option: ";
+            string choice;
+            getline(cin, choice);
 
-        Expression expr(input);
-        if (expr.evaluate()) {
-            cout << "Result: " << expr.getResult() << endl;
-        }
-        else {
-            cout << "Invalid expression or error during evaluation." << endl;
+            if (choice == "exit" || choice == "3") {
+                break;
+            }
+            else if (choice == "1") {
+                cout << "Enter an equation: ";
+                string input;
+                getline(cin, input);
+                processEquation(input);
+            }
+            else if (choice == "2") {
+                cout << "Enter file path: ";
+                string filePath;
+                getline(cin, filePath);
+                fileProcessor.processFile(filePath);
+            }
+            else {
+                cout << "Invalid choice. Please try again." << endl;
+            }
         }
     }
 
