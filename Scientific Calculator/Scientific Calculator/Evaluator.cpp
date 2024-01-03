@@ -67,9 +67,10 @@ string Evaluator::popOperator() {
 }
 
 void Evaluator::applyOperator(const string& op) {
-    if (operandsSize < 2) {
+    if (operandsSize < 2 ) { 
         throw runtime_error("Invalid expression");
     }
+
     double right = popOperand();
     double left = popOperand();
 
@@ -80,15 +81,23 @@ void Evaluator::applyOperator(const string& op) {
         if (right == 0) throw runtime_error("Division by zero");
         pushOperand(left / right);
     }
+    else if (op == "^") pushOperand(pow(left, right)); 
+    else if (op == "#") {
+        if (left < 0) throw runtime_error("Negative number under root");
+        if (right == 0) throw runtime_error("Zero as root order");
+        pushOperand(pow(left, 1.0 / right));
+    }
     else {
         throw runtime_error("Unknown operator");
     }
 }
 
+
 int Evaluator::getPrecedence(const string& op) {
     if (op == "+" || op == "-") return 1;
     if (op == "*" || op == "/") return 2;
-    return 0; 
+    if (op == "^" || op == "#") return 3;
+    return 0;
 }
 
 double Evaluator::evaluate() {
