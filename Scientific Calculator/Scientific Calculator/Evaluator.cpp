@@ -67,7 +67,7 @@ string Evaluator::popOperator() {
 }
 
 void Evaluator::applyOperator(const string& op) {
-    if (operandsSize < 2 ) { 
+    if (operandsSize < 2) {
         throw runtime_error("Invalid expression");
     }
 
@@ -81,7 +81,7 @@ void Evaluator::applyOperator(const string& op) {
         if (right == 0) throw runtime_error("Division by zero");
         pushOperand(left / right);
     }
-    else if (op == "^") pushOperand(pow(left, right)); 
+    else if (op == "^") pushOperand(pow(left, right));
     else if (op == "#") {
         if (left < 0) throw runtime_error("Negative number under root");
         if (right == 0) throw runtime_error("Zero as root order");
@@ -108,13 +108,34 @@ double Evaluator::evaluate() {
         else if (tokens[i].get_type() == TokenType::OPERATOR) {
             string op = tokens[i].get_value();
             while (operatorsSize > 0 && getPrecedence(operators[operatorsSize - 1]) >= getPrecedence(op)) {
+                if (operators[operatorsSize - 1] == "(" || operators[operatorsSize - 1] == "[" || operators[operatorsSize - 1] == "{") {
+                    break; 
+                }
                 applyOperator(popOperator());
             }
             pushOperator(op);
         }
+        else if (tokens[i].get_type() == TokenType::PARENTHESIS) {
+            string par = tokens[i].get_value();
+            if (par == "(" || par == "[" || par == "{") {
+                pushOperator(par);
+            }
+            else {
+                while (operatorsSize > 0 && operators[operatorsSize - 1] != "(" && operators[operatorsSize - 1] != "[" && operators[operatorsSize - 1] != "{") {
+                    applyOperator(popOperator());
+                }
+                if (operatorsSize > 0) {
+                    popOperator();
+                }
+            }
+        }
     }
 
     while (operatorsSize > 0) {
+        if (operators[operatorsSize - 1] == "(" || operators[operatorsSize - 1] == "[" || operators[operatorsSize - 1] == "{") {
+            popOperator();
+            continue;
+        }
         applyOperator(popOperator());
     }
 
@@ -124,6 +145,7 @@ double Evaluator::evaluate() {
 
     return popOperand();
 }
+
 
 Token* Evaluator::get_tokens() {
     return this->tokens;
