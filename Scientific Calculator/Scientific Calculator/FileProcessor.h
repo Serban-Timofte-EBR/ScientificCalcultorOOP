@@ -6,8 +6,8 @@
 
 class FileProcessor {
 public:
-    virtual void processFile(const std::string& filePath) = 0; 
-    virtual ~FileProcessor() {} 
+    virtual void processFile(const std::string& filePath) = 0;
+    virtual ~FileProcessor() {}
 };
 
 #endif 

@@ -8,8 +8,8 @@ class Evaluator {
 private:
     Token* tokens;
     int tokenCount;
-    double* operands; 
-    string* operators; 
+    double* operands;
+    string* operators;
     int operandsSize, operandsCapacity;
     int operatorsSize, operatorsCapacity;
 

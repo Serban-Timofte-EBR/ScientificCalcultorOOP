@@ -109,7 +109,7 @@ double Evaluator::evaluate() {
             string op = tokens[i].get_value();
             while (operatorsSize > 0 && getPrecedence(operators[operatorsSize - 1]) >= getPrecedence(op)) {
                 if (operators[operatorsSize - 1] == "(" || operators[operatorsSize - 1] == "[" || operators[operatorsSize - 1] == "{") {
-                    break; 
+                    break;
                 }
                 applyOperator(popOperator());
             }
